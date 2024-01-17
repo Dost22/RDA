@@ -85,7 +85,7 @@ struct RAT {
         root = new Node<Value_T, logsz>[J];
     }
 
-    #define calc() key[len - index] + key[index] + depth
+    #define calc() key[len - index] + key[index-1] + depth
     #define rootop() ((key[max(0,len-3)] ^ key[max(0,len-2)] << LJ) & (J - 1))
 
     inline Node<Value_T, logsz> *end(){
