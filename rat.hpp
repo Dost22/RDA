@@ -12,7 +12,7 @@ struct Node {
     Value_T second;
     Node<Value_T, logsz> *children[size];
     inline Node(){
-        for(int i=0;i<size;i++)children[i]=0;
+        for(int i = 0; i < size; i++) children[i] = 0;
     }
     inline ~Node() {
         if(~keyLength) delete[] key;
