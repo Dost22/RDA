@@ -1,12 +1,10 @@
-//#pragma GCC optimize("O3,unroll-loops")
 #include <cstring>
 #include <string>
-#include <iostream>
 #include <vector>
 
 using namespace std;
 
-template <typename Value_T, const int logsz = 4>
+template <typename Value_T, const int logsz = 5>
 struct Node {
     static const int size = 1 << logsz;
     char *key = nullptr;
@@ -85,7 +83,7 @@ struct RAT {
         root = new Node<Value_T, logsz>[J];
     }
 
-    #define calc() key[len - index] + key[index-1] + depth
+    #define calc() key[len - index - 1] + key[index] + depth
     #define rootop() ((key[max(0,len-3)] ^ key[max(0,len-2)] << LJ) & (J - 1))
 
     inline Node<Value_T, logsz> *end(){
@@ -123,27 +121,7 @@ struct RAT {
         depth++;
         goto beg;
     }
-
-    inline Node<Value_T, logsz> *find(const int32_t key){
-        return find(&key, 4);
-    }
-    inline Node<Value_T, logsz> *insert(const int32_t key, const Value_T &second){
-        return insert(&key, second, 4);
-    }
-    inline void erase(const int32_t key){
-        erase(&key, 4);
-    }
-
-    inline Node<Value_T, logsz> *find(const int64_t key){
-        return find(&key, 8);
-    }
-    inline Node<Value_T, logsz> *insert(const int64_t key, const Value_T second){
-        return insert(&key, second, 8);
-    }
-    inline void erase(const int64_t key){
-        erase(&key, 8);
-    }
-
+    
     inline Node<Value_T, logsz> *find(const string &key){
         return find(key.c_str(), key.size());
     }
